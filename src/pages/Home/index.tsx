@@ -2,6 +2,7 @@ import { lazy } from 'react'
 import HomeCollection from '@/assets/img-home-collection1.webp'
 import HomeCollection2 from '@/assets/img-home-collection2.webp'
 import styles from './index.module.scss'
+import { ListProduct } from '@/components'
 
 const CategoryList = lazy(() => import('@/components/ListCategory'))
 const Nav = lazy(() => import('@/components/Nav'))
@@ -18,15 +19,15 @@ const navItems = [
 
 const HomePage = () => {
   return (
-    <div className={styles.container}>
-    <Nav items={navItems} />
+    <>
+      <Nav items={navItems} />
       <main>
         <div className={`${styles.contentWrapper} ${styles.imageWrapper}`}>
           <Image
             src={HomeCollection2}
             alt="Home Collection"
             height="auto"
-            width={'70%'}
+            width={'100%'} /* Make the image responsive */
           />
         </div>
         <div className={styles.contentWrapper}>
@@ -37,12 +38,14 @@ const HomePage = () => {
             src={HomeCollection}
             alt="Home Collection"
             height="auto"
-            width={'70%'}
+            width={'100%'} /* Make the image responsive */
           />
         </div>
-        <div></div>
+        <div className={styles.listProduct}>
+          <ListProduct />
+        </div>
       </main>
-    </div>
+    </>
   )
 }
 

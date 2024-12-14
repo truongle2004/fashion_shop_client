@@ -1,15 +1,25 @@
-.container {
+main {
   display: flex;
   flex-direction: column;
-  gap: 50px;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: center; /* Centers all child elements horizontally */
+  width: 100%; /* Ensure the main container takes up full width */
+}
 
-  .contentWrapper {
-    margin: 0 20px; // Equal margin on left and right
-    display: flex;
-    justify-content: center;
-  }
+.contentWrapper {
+  width: 70%; /* You can adjust this percentage as needed */
+  margin: 0 auto; /* Ensures centering and equal left/right margins */
+}
 
-  .imageWrapper {
-    margin-top: 50px;
-  }
+.listProduct {
+  margin-top: 20px;
+  width: 70%; /* Match this width to the others for consistent margins */
+  margin: 20px auto; /* Adds vertical margin and ensures centering */
+}
+
+.imageWrapper {
+  margin-top: 50px;
+  width: 70%; /* Ensure this matches other elements for consistent centering */
+  margin: 50px auto; /* Adds vertical margin for the image */
 }
