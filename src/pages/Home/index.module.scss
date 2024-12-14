@@ -1,0 +1,15 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+
+  .contentWrapper {
+    margin: 0 20px; // Equal margin on left and right
+    display: flex;
+    justify-content: center;
+  }
+
+  .imageWrapper {
+    margin-top: 50px;
+  }
+}

@@ -41,6 +41,7 @@ const items = [
 const CategoryList = () => {
   return (
     <>
+    <div className={styles.container}>
       <h2 className={styles.title}>Danh Mục</h2>
       <div className={styles.homeCategoryList}>
         {items.map((item, index) => (
@@ -54,6 +55,7 @@ const CategoryList = () => {
           </div>
         ))}
       </div>
+    </div>
     </>
   )
 }

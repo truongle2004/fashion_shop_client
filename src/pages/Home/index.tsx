@@ -1,5 +1,7 @@
 import { lazy } from 'react'
 import HomeCollection from '@/assets/img-home-collection1.webp'
+import HomeCollection2 from '@/assets/img-home-collection2.webp'
+import styles from './index.module.scss'
 
 const CategoryList = lazy(() => import('@/components/ListCategory'))
 const Nav = lazy(() => import('@/components/Nav'))
@@ -16,27 +18,29 @@ const navItems = [
 
 const HomePage = () => {
   return (
-    <div>
-      {/* Navigation Bar */}
-      <Nav items={navItems} />
-
-      {/* Main Content */}
-      <main
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '30px',
-          justifyContent: 'space-between'
-        }}
-      >
-        <div>
+    <div className={styles.container}>
+    <Nav items={navItems} />
+      <main>
+        <div className={`${styles.contentWrapper} ${styles.imageWrapper}`}>
+          <Image
+            src={HomeCollection2}
+            alt="Home Collection"
+            height="auto"
+            width={'70%'}
+          />
+        </div>
+        <div className={styles.contentWrapper}>
           <CategoryList />
         </div>
-        <div
-          style={{ marginTop: '20px', marginRight: '20px', marginLeft: '20px' }}
-        >
-          <Image src={HomeCollection} alt="Home Collection" height="auto" />
+        <div className={`${styles.contentWrapper} ${styles.imageWrapper}`}>
+          <Image
+            src={HomeCollection}
+            alt="Home Collection"
+            height="auto"
+            width={'70%'}
+          />
         </div>
+        <div></div>
       </main>
     </div>
   )
