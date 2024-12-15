@@ -2,7 +2,7 @@ import { lazy, useEffect, useState } from 'react'
 import HomeCollection from '@/assets/img-home-collection1.webp'
 import HomeCollection2 from '@/assets/img-home-collection2.webp'
 import styles from './index.module.scss'
-import { Input, ListProduct } from '@/components'
+import { ListProduct } from '@/components'
 import { useMutation } from '@tanstack/react-query'
 import { getRandomProduct } from '@/apis/product'
 import { FashionProduct } from '@/types'
@@ -71,7 +71,7 @@ const HomePage = () => {
           Hãy nhập email của bạn vào đây để nhận được xu hướng thời trang và
           khuyến mãi mới nhất từ MARC nhé.
         </p>
-        <Input placeholder="Nhập email của bạn"/>
+        <input className="input" placeholder="Nhập email của bạn" />
       </section>
     </>
   )

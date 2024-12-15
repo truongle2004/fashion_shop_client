@@ -1,20 +1,25 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { useMutation } from '@tanstack/react-query'
 import { loginApis } from '@/apis/auth'
 import { getKey } from '@/apis/key'
 import { encryptPassword } from '@/utils/encrypt'
-import Input from '@/components/Input'
-import Button from '@/components/Button'
+import { useMutation } from '@tanstack/react-query'
+import React, { useEffect, useRef } from 'react'
+import { FieldValues, SubmitHandler, useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
 import styles from './index.module.scss'
 
 const LoginPage: React.FC = () => {
   const key = useRef<string>('')
   const navigate = useNavigate()
 
-  const [loginData, setLoginData] = useState({
-    email: '',
-    password: ''
+  const {
+    register,
+    formState: { errors },
+    handleSubmit
+  } = useForm<FieldValues>({
+    defaultValues: {
+      email: '',
+      password: ''
+    }
   })
 
   const { mutate: getPublicKey } = useMutation({
@@ -34,13 +39,9 @@ const LoginPage: React.FC = () => {
     }
   })
 
-  const handleInputChange = (field: 'email' | 'password', value: string) => {
-    setLoginData({ ...loginData, [field]: value })
-  }
+  const onSubmit: SubmitHandler<FieldValues> = (data) => {
+    const { email, password } = data
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    const { email, password } = loginData
     const passwordEncrypted = encryptPassword(password, key.current)
     login({
       email,
@@ -58,27 +59,42 @@ const LoginPage: React.FC = () => {
   }, [])
 
   return (
-    <form className={styles.container} onSubmit={handleSubmit}>
+    <form className={styles.container} onSubmit={handleSubmit(onSubmit)}>
       <h2 className={styles.title}>Login</h2>
-      <Input
+      <input
+        className={`input ${errors.email ? 'input-error' : ''}`} // Add error class if validation fails
+        {...register('email', {
+          required: 'Email is required',
+          pattern: {
+            value: /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/,
+            message: 'Invalid email format'
+          }
+        })}
         type="email"
         id="email"
         placeholder="Email"
-        value={loginData.email}
-        onChange={(e) => handleInputChange('email', e.target.value)}
-        required
       />
-      <Input
+      {errors.email && (
+        <span className="error-message">
+          {errors['email'].message?.toString()}
+        </span>
+      )}
+
+      <input
+        className={`input ${errors.password ? 'input-error' : ''}`}
+        {...register('password', { required: 'Password is required' })}
         type="password"
         id="password"
         placeholder="Password"
-        value={loginData.password}
-        onChange={(e) => handleInputChange('password', e.target.value)}
-        required
       />
-      <Button type="submit" disabled={isPending}>
+      {errors.password && (
+        <span className="error-message">
+          {errors.password.message?.toString()}
+        </span>
+      )}
+      <button className="btn btn-primary" type="submit" disabled={isPending}>
         {isPending ? 'Loading...' : 'Login'}
-      </Button>
+      </button>
       <div className={styles.link}>
         Don't have an account?{' '}
         <span onClick={handleNavigateToRegister}>Register</span>
