@@ -1,25 +1,23 @@
+$container-width: 70%;
+$default-margin: 50px auto;
+
 main {
   display: flex;
   flex-direction: column;
   margin: 0 auto;
   justify-content: center;
-  align-items: center; /* Centers all child elements horizontally */
-  width: 100%; /* Ensure the main container takes up full width */
-}
+  align-items: center;
+  width: 100%;
 
-.contentWrapper {
-  width: 70%; /* You can adjust this percentage as needed */
-  margin: 0 auto; /* Ensures centering and equal left/right margins */
-}
+  .contentWrapper,
+  .imageWrapper,
+  .categoryList,
+  .listProduct {
+    width: $container-width;
+    margin: $default-margin;
+  }
 
-.listProduct {
-  margin-top: 20px;
-  width: 70%; /* Match this width to the others for consistent margins */
-  margin: 20px auto; /* Adds vertical margin and ensures centering */
-}
-
-.imageWrapper {
-  margin-top: 50px;
-  width: 70%; /* Ensure this matches other elements for consistent centering */
-  margin: 50px auto; /* Adds vertical margin for the image */
+  .listProduct {
+    margin-top: 20px;
+  }
 }

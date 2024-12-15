@@ -1,22 +1,33 @@
+import { FashionProduct } from '@/types'
 import styles from './index.module.scss'
 import Image from '@/components/Image'
 
-const Card: React.FC = () => {
+interface CardProps {
+  product: FashionProduct
+}
+
+const Card: React.FC<CardProps> = ({ product }) => {
+  const { _id, _name, _price, _imagesColor } = product
+
+  const imageUrl = _imagesColor[0]?._url || ''
+
+  const imageId = _imagesColor[0]?._id || ''
+
+  if (!product) {
+    return <p>loading...</p>
+  }
   return (
-    <div className={styles.card}>
+    <div className={styles.card} key={_id}>
       <div className={styles.cardImage}>
-        <Image
-          src="https://product.hstatic.net/1000197303/product/pro_hong_01_3_7ea894d960af47e2a7e555980be965eb.jpg"
-          alt="test"
-        />
+        <Image src={imageUrl} alt="test" key={imageId} />
       </div>
       <div className={styles.cardInfo}>
-        <div className={styles.cardName}>Product Name</div>
-        <div className={styles.cardPrice}>398,000đ</div>
-        <div className={styles.cardColors}>
-          <div className="colorCircle"></div>
-          <div className="colorCircle"></div>
-        </div>
+        <div className={styles.cardName}>{_name}</div>
+        <div className={styles.cardPrice}>{_price}</div>
+        {/* <div className={styles.cardColors}> */}
+        {/*   <div className="colorCircle"></div> */}
+        {/*   <div className="colorCircle"></div> */}
+        {/* </div> */}
       </div>
     </div>
   )

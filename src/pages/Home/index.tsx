@@ -1,8 +1,11 @@
-import { lazy } from 'react'
+import { lazy, useEffect, useState } from 'react'
 import HomeCollection from '@/assets/img-home-collection1.webp'
 import HomeCollection2 from '@/assets/img-home-collection2.webp'
 import styles from './index.module.scss'
 import { ListProduct } from '@/components'
+import { useMutation } from '@tanstack/react-query'
+import { getRandomProduct } from '@/apis/product'
+import { FashionProduct } from '@/types'
 
 const CategoryList = lazy(() => import('@/components/ListCategory'))
 const Nav = lazy(() => import('@/components/Nav'))
@@ -18,32 +21,46 @@ const navItems = [
 ]
 
 const HomePage = () => {
+  const [products, setProducts] = useState<FashionProduct[]>([])
+  const { mutate: getRandomProductMutate } = useMutation({
+    mutationFn: getRandomProduct,
+    onSuccess: (data) => {
+      setProducts(data)
+    }
+  })
+
+  useEffect(() => {
+    if (products.length === 0) getRandomProductMutate()
+  }, [])
+
   return (
     <>
-      <Nav items={navItems} />
+      <header>
+        <Nav items={navItems} />
+      </header>
       <main>
-        <div className={`${styles.contentWrapper} ${styles.imageWrapper}`}>
+        <section className={styles.contentWrapper}>
           <Image
             src={HomeCollection2}
             alt="Home Collection"
             height="auto"
-            width={'100%'} /* Make the image responsive */
+            width="100%"
           />
-        </div>
-        <div className={styles.contentWrapper}>
+        </section>
+        <section className={styles.categoryList}>
           <CategoryList />
-        </div>
-        <div className={`${styles.contentWrapper} ${styles.imageWrapper}`}>
+        </section>
+        <section className={styles.contentWrapper}>
           <Image
             src={HomeCollection}
             alt="Home Collection"
             height="auto"
-            width={'100%'} /* Make the image responsive */
+            width="100%"
           />
-        </div>
-        <div className={styles.listProduct}>
-          <ListProduct />
-        </div>
+        </section>
+        <section className={styles.listProduct}>
+          <ListProduct data={products} />
+        </section>
       </main>
     </>
   )

@@ -36,3 +36,19 @@ export interface GetAccountInfoResponse {
 export interface RefreshTokenResponse {
   accessToken: string
 }
+
+export interface FashionProduct {
+  _id: string
+  _name: string
+  _price: number
+  _size: string[]
+  _category: string
+  _currency: string
+  _descriptionOfUse: string[]
+  _features: string[]
+  _imagesColor: Array<{
+    _id: string
+    _url: string
+    _color?: string
+  }>
+}
