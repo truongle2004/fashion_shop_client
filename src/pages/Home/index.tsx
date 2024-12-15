@@ -1,11 +1,14 @@
-import { lazy, useEffect, useState } from 'react'
+import { getRandomProduct } from '@/apis/product'
 import HomeCollection from '@/assets/img-home-collection1.webp'
 import HomeCollection2 from '@/assets/img-home-collection2.webp'
-import styles from './index.module.scss'
 import { ListProduct } from '@/components'
-import { useMutation } from '@tanstack/react-query'
-import { getRandomProduct } from '@/apis/product'
+import Footer from '@/components/Footer'
 import { FashionProduct } from '@/types'
+import { faPaperPlane } from '@fortawesome/free-regular-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { useMutation } from '@tanstack/react-query'
+import { lazy, useEffect, useState } from 'react'
+import styles from './index.module.scss'
 
 const CategoryList = lazy(() => import('@/components/ListCategory'))
 const Nav = lazy(() => import('@/components/Nav'))
@@ -66,13 +69,24 @@ const HomePage = () => {
         </section>
       </main>
       <section className={styles.newsletter}>
-        <h2>Đăng ký nhận tin và ưu đãi</h2>
+        <h1>Đăng ký nhận tin và ưu đãi</h1>
         <p>
           Hãy nhập email của bạn vào đây để nhận được xu hướng thời trang và
           khuyến mãi mới nhất từ MARC nhé.
         </p>
-        <input className="input" placeholder="Nhập email của bạn" />
+        <div>
+          <input
+            className={`input ${styles.inputNewsLetter}`}
+            placeholder="Nhập email của bạn"
+          />
+          <button className="btn btn-primary">
+            <FontAwesomeIcon icon={faPaperPlane} />
+          </button>
+        </div>
       </section>
+      <footer>
+        <Footer />
+      </footer>
     </>
   )
 }

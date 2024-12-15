@@ -1,43 +1,61 @@
 $container-width: 70%;
 $default-margin: 50px auto;
-$newletter_text_color: #ffffff;
+$newsletter-text-color: #ffffff;
 
-main {
+@mixin flex-column {
     display: flex;
     flex-direction: column;
-    margin: 0 auto;
     justify-content: center;
     align-items: center;
+}
+
+main {
+    @include flex-column;
+    margin: 0 auto;
     width: 100%;
 
-    .contentWrapper,
-    .imageWrapper,
-    .categoryList,
-    .listProduct {
+    section {
         width: $container-width;
         margin: $default-margin;
-    }
-
-    .listProduct {
-        margin-top: 20px;
     }
 }
 
 .newsletter {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    @include flex-column;
     background-color: #2C2C2C;
-    padding-top: 10px 0px;
     gap: 10px;
+    padding: 90px;
 
-    h2,
-    p {
-        color: $newletter_text_color;
+    h1 {
+        font-size: 40px;
+        color: $newsletter-text-color;
     }
 
-    .input-newsletter {
-        width: $container-width;
+    p {
+        color: $newsletter-text-color;
+    }
+
+    div {
+
+        @include flex-column;
+        flex-direction: row;
+        gap: 5px;
+
+        input {
+            width: 300px;
+            height: 50px;
+        }
+
+        button {
+            @include flex-column;
+            width: 30px;
+
+            border-radius: 50%;
+            border: none;
+
+            svg {
+                font-size: 20px;
+            }
+        }
     }
 }
