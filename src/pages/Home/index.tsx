@@ -20,6 +20,9 @@ const navItems = [
   { label: 'CỬA HÀNG', path: '/store' }
 ]
 
+// TODO: adding best seller part
+// TODO: adding color in card
+// TODO: adding footer
 const HomePage = () => {
   const [products, setProducts] = useState<FashionProduct[]>([])
   const { mutate: getRandomProductMutate } = useMutation({

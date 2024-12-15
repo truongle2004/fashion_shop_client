@@ -1,13 +1,14 @@
 import { FashionProduct } from '@/types'
 import styles from './index.module.scss'
 import Image from '@/components/Image'
+import { formatPriceCustom } from '@/utils/formatPrice'
 
 interface CardProps {
   product: FashionProduct
 }
 
 const Card: React.FC<CardProps> = ({ product }) => {
-  const { _id, _name, _price, _imagesColor } = product
+  const { _id, _name, _price, _imagesColor, _currency } = product
 
   const imageUrl = _imagesColor[0]?._url || ''
 
@@ -23,7 +24,9 @@ const Card: React.FC<CardProps> = ({ product }) => {
       </div>
       <div className={styles.cardInfo}>
         <div className={styles.cardName}>{_name}</div>
-        <div className={styles.cardPrice}>{_price}</div>
+        <div className={styles.cardPrice}>
+          {formatPriceCustom(_price, _currency)}
+        </div>
         {/* <div className={styles.cardColors}> */}
         {/*   <div className="colorCircle"></div> */}
         {/*   <div className="colorCircle"></div> */}
