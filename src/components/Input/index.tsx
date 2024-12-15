@@ -20,7 +20,7 @@ const Input: React.FC<InputProps> = ({
   onChange,
   className = '',
   required = false,
-  showLabel = true
+  showLabel = true,
 }) => {
   return (
     <div className={`${styles.inputWrapper} ${className}`}>

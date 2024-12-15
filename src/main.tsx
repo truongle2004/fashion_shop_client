@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import App from './App.tsx'
+import './main.css'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fas } from '@fortawesome/free-solid-svg-icons' // Solid icons

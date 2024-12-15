@@ -2,7 +2,7 @@ import { lazy, useEffect, useState } from 'react'
 import HomeCollection from '@/assets/img-home-collection1.webp'
 import HomeCollection2 from '@/assets/img-home-collection2.webp'
 import styles from './index.module.scss'
-import { ListProduct } from '@/components'
+import { Input, ListProduct } from '@/components'
 import { useMutation } from '@tanstack/react-query'
 import { getRandomProduct } from '@/apis/product'
 import { FashionProduct } from '@/types'
@@ -65,6 +65,14 @@ const HomePage = () => {
           <ListProduct data={products} />
         </section>
       </main>
+      <section className={styles.newsletter}>
+        <h2>Đăng ký nhận tin và ưu đãi</h2>
+        <p>
+          Hãy nhập email của bạn vào đây để nhận được xu hướng thời trang và
+          khuyến mãi mới nhất từ MARC nhé.
+        </p>
+        <Input placeholder="Nhập email của bạn"/>
+      </section>
     </>
   )
 }
