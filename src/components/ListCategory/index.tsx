@@ -6,7 +6,7 @@ import Category5 from '@/assets/category5-img.webp'
 import Category6 from '@/assets/category6-img.webp'
 import Category7 from '@/assets/category7-img.webp'
 import styles from './index.module.scss'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { convertToSlug } from '@/utils/convertToSlug'
 
 const BASE_URL = '/collection'
@@ -44,10 +44,17 @@ const items = [
 
 const CategoryList = () => {
   const navigate = useNavigate()
+  const location = useLocation()
+
   const handleClickItem = (str: string) => {
     const slug = convertToSlug(str)
     navigate(BASE_URL + '/' + slug)
   }
+
+  const isVisiting = (name: string) => {
+    return location.pathname.includes(convertToSlug(name))
+  }
+
   return (
     <>
       <div className={styles.container}>
@@ -59,11 +66,19 @@ const CategoryList = () => {
               className={styles.categoryItem}
               onClick={() => handleClickItem(item.name)}
             >
-              <img
-                src={item.image}
-                alt={item.name}
-                className={styles.categoryImage}
-              />
+              {!isVisiting(item.name) ? (
+                <img
+                  src={item.image}
+                  alt={item.name}
+                  className={styles.categoryImage}
+                />
+              ) : (
+                <img
+                  src={item.image}
+                  alt={item.name}
+                  className={`${styles.categoryImage} ${styles.categoryHighlight}`}
+                />
+              )}
               <p>{item.name}</p>
             </div>
           ))}

@@ -9,17 +9,6 @@ $newsletter-text-color: #ffffff;
     align-items: center;
 }
 
-.container {
-    @include flex-column;
-    margin: 0 auto;
-    width: 100%;
-
-    section {
-        width: $container-width;
-        margin: $default-margin;
-    }
-}
-
 .newsletter {
     @include flex-column;
     background-color: #2C2C2C;

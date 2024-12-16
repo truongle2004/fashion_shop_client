@@ -11,12 +11,14 @@ const navItems = [
 
 const Layout = () => {
   return (
-    <div>
-      <Nav items={navItems} />
+    <>
+      <nav>
+        <Nav items={navItems} />
+      </nav>
       <main>
         <Outlet />
       </main>
-    </div>
+    </>
   )
 }
 

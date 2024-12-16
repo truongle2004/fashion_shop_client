@@ -6,10 +6,10 @@ $font-size-small: 0.875rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-}
 
-.title {
-  text-align: center;
+  .title {
+    text-align: center;
+  }
 }
 
 .homeCategoryList {
@@ -26,9 +26,11 @@ $font-size-small: 0.875rem;
   width: $category-size;
   height: $category-size;
   text-align: center;
+  transition: transform 0.2s;
 
   &:hover {
     cursor: pointer;
+    transform: scale(1.05);
   }
 
   p {
@@ -39,4 +41,10 @@ $font-size-small: 0.875rem;
 .categoryImage {
   width: $category-size;
   height: $category-size;
+  border-radius: 50%; // Added for consistent styling
+}
+
+.categoryHighlight {
+  border: 2px solid red; // Combined border properties for simplicity
+  border-radius: 50%;
 }

@@ -11,7 +11,6 @@ import { lazy, useEffect, useState } from 'react'
 import styles from './index.module.scss'
 
 const CategoryList = lazy(() => import('@/components/ListCategory'))
-const Nav = lazy(() => import('@/components/Nav'))
 const Image = lazy(() => import('@/components/Image'))
 
 // TODO: adding best seller part
@@ -32,19 +31,19 @@ const HomePage = () => {
 
   return (
     <>
-      <main className={styles.container}>
-        <section className={styles.contentWrapper}>
-          <Image
+      <main className="container">
+        <section>
+          <img
             src={HomeCollection2}
             alt="Home Collection"
             height="auto"
             width="100%"
           />
         </section>
-        <section className={styles.categoryList}>
+        <section>
           <CategoryList />
         </section>
-        <section className={styles.contentWrapper}>
+        <section>
           <Image
             src={HomeCollection}
             alt="Home Collection"
@@ -52,7 +51,7 @@ const HomePage = () => {
             width="100%"
           />
         </section>
-        <section className={styles.listProduct}>
+        <section>
           <ListProduct data={products} />
         </section>
       </main>

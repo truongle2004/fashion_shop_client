@@ -6,7 +6,7 @@ import Layout from '@/components/layout';
 const Login = lazy(() => import('@/pages/Login'));
 const Register = lazy(() => import('@/pages/Register'));
 const Home = lazy(() => import('@/pages/Home'));
-const Signature = lazy(() => import('@/pages/Collection/Signature'));
+const Collection = lazy(() => import('@/pages/Collection'));
 
 const router = createBrowserRouter([
   {
@@ -42,10 +42,10 @@ const router = createBrowserRouter([
         )
       },
       {
-        path: 'collection/signature',
+        path: 'collection/:category',
         element: (
           <Suspense fallback={<div>Loading...</div>}>
-            <Signature />
+            <Collection />
           </Suspense>
         )
       }
