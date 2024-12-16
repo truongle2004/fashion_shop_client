@@ -14,15 +14,6 @@ const CategoryList = lazy(() => import('@/components/ListCategory'))
 const Nav = lazy(() => import('@/components/Nav'))
 const Image = lazy(() => import('@/components/Image'))
 
-const navItems = [
-  { label: 'NEW IN', path: '/home' },
-  { label: 'SẢN PHẨM', path: '/home' },
-  { label: 'LOOKBOOK', path: '/home' },
-  { label: 'DỊP/SỰ KIỆN', path: '/event' },
-  { label: 'BLOG', path: '/blog' },
-  { label: 'CỬA HÀNG', path: '/store' }
-]
-
 // TODO: adding best seller part
 // TODO: adding color in card
 // TODO: adding footer
@@ -41,10 +32,7 @@ const HomePage = () => {
 
   return (
     <>
-      <header>
-        <Nav items={navItems} />
-      </header>
-      <main>
+      <main className={styles.container}>
         <section className={styles.contentWrapper}>
           <Image
             src={HomeCollection2}

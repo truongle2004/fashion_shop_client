@@ -1,9 +1,12 @@
-import { createBrowserRouter, Navigate } from 'react-router-dom'
-import { lazy, Suspense } from 'react'
+import { createBrowserRouter, Navigate } from 'react-router-dom';
+import { lazy, Suspense } from 'react';
+import Layout from '@/components/layout';
 
-const Login = lazy(() => import('@/pages/Login'))
-const Register = lazy(() => import('@/pages/Register'))
-const Home = lazy(() => import('@/pages/Home'))
+
+const Login = lazy(() => import('@/pages/Login'));
+const Register = lazy(() => import('@/pages/Register'));
+const Home = lazy(() => import('@/pages/Home'));
+const Signature = lazy(() => import('@/pages/Collection/Signature'));
 
 const router = createBrowserRouter([
   {
@@ -27,13 +30,27 @@ const router = createBrowserRouter([
     )
   },
   {
-    path: '/home',
-    element: (
-      <Suspense fallback={<div>Loading...</div>}>
-        <Home />
-      </Suspense>
-    )
+    path: '/',
+    element: <Layout />,
+    children: [
+      {
+        path: 'home',
+        element: (
+          <Suspense fallback={<div>Loading...</div>}>
+            <Home />
+          </Suspense>
+        )
+      },
+      {
+        path: 'collection/signature',
+        element: (
+          <Suspense fallback={<div>Loading...</div>}>
+            <Signature />
+          </Suspense>
+        )
+      }
+    ]
   }
-])
+]);
 
-export default router
+export default router;
