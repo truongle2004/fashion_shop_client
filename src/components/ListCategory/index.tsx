@@ -51,9 +51,8 @@ const CategoryList = () => {
     navigate(BASE_URL + '/' + slug)
   }
 
-  const isVisiting = (name: string) => {
-    return location.pathname.includes(convertToSlug(name))
-  }
+  const isVisiting = (name: string) =>
+    location.pathname.includes(convertToSlug(name))
 
   return (
     <>

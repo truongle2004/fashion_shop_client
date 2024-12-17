@@ -1,13 +1,13 @@
-import { useEffect, useState } from 'react'
-import { ListCategory, ListProduct } from '@/components'
+import { getListProductByCategory, orderProductByPrice } from '@/apis/product'
 import HomeCollection2 from '@/assets/img-home-collection2.webp'
-import styles from './index.module.scss'
+import { ListCategory, ListProduct } from '@/components'
+import { FashionProduct, OrderType } from '@/types'
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useMutation } from '@tanstack/react-query'
-import { getListProductByCategory } from '@/apis/product'
-import { FashionProduct } from '@/types'
-import { useLocation, useParams } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
+import styles from './index.module.scss'
 
 // TODO: using global dropdown menu css
 const SignatureCollection = () => {
@@ -15,14 +15,14 @@ const SignatureCollection = () => {
 
   const [listProducts, setListProducts] = useState<FashionProduct[]>([])
 
-  const toggleDropdown = () => {
-    setIsDropdownOpen((prev) => !prev)
-  }
+  const { category } = useParams()
 
-  const handleSelectOption = (option: string) => {
-    console.log('Selected option:', option)
-    setIsDropdownOpen(false)
-  }
+  const { mutate: orderProductByPriceMutation } = useMutation({
+    mutationFn: orderProductByPrice,
+    onSuccess: (data) => {
+      setListProducts(data)
+    }
+  })
 
   const { mutate: getListProductByCategoryMutation } = useMutation({
     mutationFn: getListProductByCategory,
@@ -31,11 +31,33 @@ const SignatureCollection = () => {
     }
   })
 
-  const { category } = useParams()
+  const toggleDropdown = () => {
+    setIsDropdownOpen((prev) => !prev)
+  }
+
+  const handleOrderASC = () => {
+    if (category) {
+      orderProductByPriceMutation({
+        category,
+        type: OrderType.ASC
+      })
+    }
+    setIsDropdownOpen(false)
+  }
+
+  const handleOrderDESC = () => {
+    if (category) {
+      orderProductByPriceMutation({
+        category,
+        type: OrderType.DESC
+      })
+    }
+    setIsDropdownOpen(false)
+  }
 
   useEffect(() => {
     if (category) getListProductByCategoryMutation(category)
-  }, [])
+  }, [category])
 
   return (
     <main className="container">
@@ -67,12 +89,8 @@ const SignatureCollection = () => {
             </button>
             {isDropdownOpen && (
               <ul className={styles.dropdownMenu}>
-                <li onClick={() => handleSelectOption('Giá: Thấp đến Cao')}>
-                  Giá: Thấp đến Cao
-                </li>
-                <li onClick={() => handleSelectOption('Giá: Cao đến Thấp')}>
-                  Giá: Cao đến Thấp
-                </li>
+                <li onClick={handleOrderASC}>Giá: Thấp đến Cao</li>
+                <li onClick={handleOrderDESC}>Giá: Cao đến Thấp</li>
               </ul>
             )}
           </div>

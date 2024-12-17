@@ -52,3 +52,8 @@ export interface FashionProduct {
     _color?: string
   }>
 }
+
+export enum OrderType {
+  ASC = 'asc',
+  DESC = 'desc'
+}
