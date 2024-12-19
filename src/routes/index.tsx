@@ -1,12 +1,12 @@
-import { createBrowserRouter, Navigate } from 'react-router-dom';
-import { lazy, Suspense } from 'react';
-import Layout from '@/components/layout';
+import { createBrowserRouter, Navigate } from 'react-router-dom'
+import { lazy, Suspense } from 'react'
+import Layout from '@/components/layout'
 
-
-const Login = lazy(() => import('@/pages/Login'));
-const Register = lazy(() => import('@/pages/Register'));
-const Home = lazy(() => import('@/pages/Home'));
-const Collection = lazy(() => import('@/pages/Collection'));
+const Login = lazy(() => import('@/pages/Login'))
+const Register = lazy(() => import('@/pages/Register'))
+const Home = lazy(() => import('@/pages/Home'))
+const Collection = lazy(() => import('@/pages/Collection'))
+const Detail = lazy(() => import('@/pages/Detail'))
 
 const router = createBrowserRouter([
   {
@@ -48,9 +48,17 @@ const router = createBrowserRouter([
             <Collection />
           </Suspense>
         )
+      },
+      {
+        path: 'detail',
+        element: (
+          <Suspense fallback={<div>Loading...</div>}>
+            <Detail />
+          </Suspense>
+        )
       }
     ]
   }
-]);
+])
 
-export default router;
+export default router

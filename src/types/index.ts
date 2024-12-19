@@ -41,7 +41,7 @@ export interface FashionProduct {
   _id: string
   _name: string
   _price: number
-  _size: string[]
+  _sizes: string[]
   _category: string
   _currency: string
   _descriptionOfUse: string[]

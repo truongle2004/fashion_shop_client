@@ -1,6 +1,5 @@
 import { FashionProduct } from '@/types'
 import styles from './index.module.scss'
-import Image from '@/components/Image'
 import { formatPriceCustom } from '@/utils/formatPrice'
 
 interface CardProps {
@@ -20,7 +19,7 @@ const Card: React.FC<CardProps> = ({ product }) => {
   return (
     <div className={styles.card} key={_id}>
       <div className={styles.cardImage}>
-        <Image src={imageUrl} alt="test" key={imageId} />
+        <img src={imageUrl} alt="test" key={imageId} />
       </div>
       <div className={styles.cardInfo}>
         <div className={styles.cardName}>{_name}</div>

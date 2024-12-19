@@ -11,7 +11,6 @@ import { lazy, useEffect, useState } from 'react'
 import styles from './index.module.scss'
 
 const CategoryList = lazy(() => import('@/components/ListCategory'))
-const Image = lazy(() => import('@/components/Image'))
 
 // TODO: adding best seller part
 // TODO: adding color in card
@@ -44,7 +43,7 @@ const HomePage = () => {
           <CategoryList />
         </section>
         <section>
-          <Image
+          <img
             src={HomeCollection}
             alt="Home Collection"
             height="auto"

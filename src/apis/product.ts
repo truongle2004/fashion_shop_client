@@ -22,3 +22,7 @@ export const orderProductByPrice = async ({
     params: { category, type }
   })
 }
+
+export const getDetailProduct = async (id: string): Promise<FashionProduct> => {
+  return await axiosInstance.get(`api/products/detail/${id}`)
+}

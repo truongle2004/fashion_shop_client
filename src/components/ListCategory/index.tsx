@@ -1,5 +1,4 @@
 import Category1 from '@/assets/category1-img.webp'
-import Category2 from '@/assets/category2-img.webp'
 import Category3 from '@/assets/category3-img.webp'
 import Category4 from '@/assets/category4-img.webp'
 import Category5 from '@/assets/category5-img.webp'
@@ -15,10 +14,6 @@ const items = [
   {
     name: 'SIGNATURE',
     image: Category1
-  },
-  {
-    name: 'Back In Stock',
-    image: Category2
   },
   {
     name: 'Áo Kiểu',
