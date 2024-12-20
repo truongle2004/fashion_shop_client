@@ -42,7 +42,7 @@ const router = createBrowserRouter([
         )
       },
       {
-        path: 'collection/:category',
+        path: 'collection',
         element: (
           <Suspense fallback={<div>Loading...</div>}>
             <Collection />

@@ -7,8 +7,8 @@ $image_width: 600px;
     height: 100%;
     justify-content: center;
 
-    /* Responsive container */
-    @media (min-width: 768px) {
+    @media (min-width: 600px) {
+        /* Responsive container */
         flex-direction: row;
         gap: 3rem;
     }

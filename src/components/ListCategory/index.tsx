@@ -37,15 +37,27 @@ const items = [
   }
 ]
 
+const DEFAULT_FIRST_PAGE = 1
+
 const CategoryList = () => {
   const navigate = useNavigate()
   const location = useLocation()
 
   const handleClickItem = (str: string) => {
+    // NOTE: convert string to slug for easier navigation (e.g: SIGNATURE -> signature, Ao Kieu -> ao-kieu)
     const slug = convertToSlug(str)
-    navigate(BASE_URL + '/' + slug)
+    const params = new URLSearchParams()
+    params.set('category', slug)
+
+    // NOTE: By default page is 1
+    params.set('page', DEFAULT_FIRST_PAGE.toString())
+
+    /* NOTE: Set params to url can provide collection 
+    page neccessary information like category and page */
+    navigate(`${BASE_URL}?${params.toString()}`)
   }
 
+  // NOTE: Check if user is visiting specific category, we will highlight image of that category item by css
   const isVisiting = (name: string) =>
     location.pathname.includes(convertToSlug(name))
 
