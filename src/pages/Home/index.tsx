@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useMutation } from '@tanstack/react-query'
 import { lazy, useEffect, useState } from 'react'
 import styles from './index.module.scss'
+import { useNavigate } from 'react-router-dom'
 
 const CategoryList = lazy(() => import('@/components/ListCategory'))
 
@@ -23,6 +24,16 @@ const HomePage = () => {
       setProducts(data)
     }
   })
+
+  const navigate = useNavigate()
+
+  const onClickCard = (id: string, category: string) => {
+    const params = new URLSearchParams()
+    params.set('category', category || '')
+    params.set('id', id)
+
+    navigate(`/detail?${params.toString()}`)
+  }
 
   useEffect(() => {
     if (products.length === 0) getRandomProductMutate()
@@ -51,7 +62,7 @@ const HomePage = () => {
           />
         </section>
         <section>
-          <ListProduct data={products} />
+          <ListProduct data={products} onClickCard={onClickCard} />
         </section>
       </main>
       <section className={styles.newsletter}>

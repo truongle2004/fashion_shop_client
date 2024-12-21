@@ -1,4 +1,8 @@
-import { getListProductByCategory, orderProductByPrice } from '@/apis/product'
+import {
+  getDetailProduct,
+  getListProductByCategory,
+  orderProductByPrice
+} from '@/apis/product'
 import HomeCollection2 from '@/assets/img-home-collection2.webp'
 import { ListCategory, ListProduct, Pagination } from '@/components'
 import { FashionProduct, OrderType } from '@/types'
@@ -6,7 +10,7 @@ import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useMutation } from '@tanstack/react-query'
 import { useEffect, useState } from 'react'
-import { useParams, useSearchParams } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import styles from './index.module.scss'
 
 const DEFAULT_FIRST_PAGE = 1
@@ -22,6 +26,8 @@ const CollectionPage = () => {
   const [searchParams] = useSearchParams()
 
   const category = searchParams.get('category')
+
+  const navigate = useNavigate()
 
   const [currentPage, setCurrentPage] = useState<number>(() => {
     const currentPage = searchParams.get('page')
@@ -52,6 +58,16 @@ const CollectionPage = () => {
     setIsDropdownOpen((prev) => !prev)
   }
 
+  const onClickCard = (id: string) => {
+    const params = new URLSearchParams()
+    params.set('category', category || '')
+
+    console.log('is called')
+    params.set('id', id)
+
+    navigate(`/detail?${params.toString()}/${id}`)
+  }
+
   const handleOrderASC = () => {
     if (category) {
       orderProductByPriceMutation({
@@ -74,7 +90,11 @@ const CollectionPage = () => {
 
   useEffect(() => {
     if (category)
-      getListProductByCategoryMutation({ category, page: currentPage })
+      getListProductByCategoryMutation({
+        limit: 20,
+        category,
+        page: currentPage
+      })
   }, [category, currentPage])
 
   return (
@@ -116,7 +136,7 @@ const CollectionPage = () => {
           </div>
         </section>
         <section>
-          <ListProduct data={listProducts} />
+          <ListProduct data={listProducts} onClickCard={onClickCard} />
         </section>
       </main>
 
