@@ -17,6 +17,8 @@ const DetailPage = () => {
 
   const [listProduct, setListProduct] = useState<FashionProduct[]>([])
 
+  const [coreImage, setCoreImage] = useState(product?._imagesColor?.[0]?._url)
+
   const navigate = useNavigate()
 
   const [param] = useSearchParams()
@@ -29,6 +31,7 @@ const DetailPage = () => {
     mutationFn: getDetailProduct,
     onSuccess: (data) => {
       setProduct(data)
+      setCoreImage(data?._imagesColor?.[0]?._url)
     }
   })
 
@@ -57,6 +60,10 @@ const DetailPage = () => {
     navigate(`/detail?${params.toString()}`)
   }
 
+  const handleClickImage = (url: string) => {
+    setCoreImage(url)
+  }
+
   useEffect(() => {
     if (category) {
       getDetailProductMutation(id)
@@ -81,15 +88,16 @@ const DetailPage = () => {
                 src={item._url}
                 alt={`${product._name} - ${index}`}
                 className={styles.galleryImage}
+                onClick={() => handleClickImage(item._url)}
               />
             ))}
           </section>
 
           {/* Featured Image Section */}
           <figure className={styles.featuredImage}>
-            {product?._imagesColor?.[0] && (
+            {coreImage && (
               <img
-                src={product._imagesColor[0]._url}
+                src={coreImage || product?._imagesColor?.[0]?._url}
                 alt={product._name}
                 className={styles.image}
               />
