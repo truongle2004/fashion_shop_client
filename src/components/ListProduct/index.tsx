@@ -1,6 +1,7 @@
+import Card from '@/components/Card'
 import { FashionProduct } from '@/types'
 import styles from './index.module.scss'
-import Card from '@/components/Card'
+import { useEffect } from 'react'
 
 interface ProductProps {
   data: FashionProduct[]
@@ -11,6 +12,7 @@ const ListProduct: React.FC<ProductProps> = ({ data, onClickCard }) => {
   if (!data) {
     return <p>Loading...</p>
   }
+
   return (
     <div className={styles.list}>
       {data.map((product) => (

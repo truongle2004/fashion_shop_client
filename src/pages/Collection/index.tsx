@@ -62,10 +62,9 @@ const CollectionPage = () => {
     const params = new URLSearchParams()
     params.set('category', category || '')
 
-    console.log('is called')
     params.set('id', id)
 
-    navigate(`/detail?${params.toString()}/${id}`)
+    navigate(`/detail?${params.toString()}`)
   }
 
   const handleOrderASC = () => {

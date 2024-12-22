@@ -3,6 +3,8 @@ $button_width: 200px;
 
 .detailPage {
   padding-top: 20px;
+  width: 80%;
+  margin: auto;
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -16,15 +18,14 @@ $button_width: 200px;
 }
 
 .product_detail_main {
-  /* max-height: 600px; */
+  max-height: 800px;
   display: flex;
   flex-direction: row;
   justify-content: center;
   margin-bottom: 2rem;
   gap: 2rem;
   padding: 1rem;
-
-  padding-bottom: 20px;
+  margin-bottom: 20px;
 
   .gallery {
     display: flex;
@@ -36,8 +37,8 @@ $button_width: 200px;
     width: img_width;
 
     &Image {
-      width: 100%;
-      height: 100%;
+      /* width: 100%; */
+      /* height: 100%; */
       max-width: 200px;
       object-fit: cover;
       border-radius: 0.5rem;
@@ -146,6 +147,10 @@ $button_width: 200px;
   }
 }
 
+
+.productDetails_descriptionOfUse {
+    margin-bottom: 20px;
+}
 .productDetails_descriptionOfUse .productDetails_features {
   button {
     width: $button_width;
@@ -153,6 +158,5 @@ $button_width: 200px;
 }
 
 .comments {
-  padding-top: 20px;
-  margin-top: 2rem;
+  margin-top: 20px;
 }

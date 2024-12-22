@@ -2,7 +2,7 @@ import { getDetailProduct, getListProductByCategory } from '@/apis/product'
 import { ListProduct } from '@/components'
 import { FashionProduct } from '@/types'
 import { useMutation } from '@tanstack/react-query'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import styles from './index.module.scss'
 
@@ -32,6 +32,9 @@ const DetailPage = () => {
     onSuccess: (data) => {
       setProduct(data)
       setCoreImage(data?._imagesColor?.[0]?._url)
+
+      // NOTE: Scroll to top of page after get product detail on success
+      window.scrollTo(0, 0)
     }
   })
 
@@ -107,7 +110,10 @@ const DetailPage = () => {
           {/* Product Details Section */}
           <section className={styles.productDetails}>
             <h1 className={styles.title}>{product?._name}</h1>
-            <p className={styles.price}>{product?._price}</p>
+            <p className={styles.price}>
+              {product?._price}
+              <span>{product?._currency}</span>
+            </p>
 
             {/* Size Selection */}
             <div className={styles.sizes}>
@@ -171,7 +177,7 @@ const DetailPage = () => {
         </div>
 
         {/* Comment Section */}
-        <div>comment here</div>
+        <div className={styles.comments}>comment here</div>
 
         <section>
           <h2>Ban co the quan tam</h2>
